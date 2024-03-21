@@ -5,3 +5,5 @@
 3. Share state amoung multiple components
 4. Custom hook for confirm popup
 5. Star rating
+
+Ref: [https://github.com/NikhilJHA01/Machine-Coding-Round/tree/main](https://github.com/NikhilJHA01/Machine-Coding-Round/tree/main)
