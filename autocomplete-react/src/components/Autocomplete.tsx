@@ -1,20 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useDeferredValue } from "react";
 
 export const Autocomplete = () => {
   const [searchItem, setSearchItem] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
+  const deferredSearchtem = useDeferredValue(searchItem);
+
   useEffect(() => {
-    if (!searchItem || searchItem?.length < 3) {
+    if (!deferredSearchtem || deferredSearchtem?.length < 3) {
       setSuggestions([]);
       return;
     }
     fetchProductsApi();
-  }, [searchItem]);
+  }, [deferredSearchtem]);
 
   const fetchProductsApi = async () => {
     const data = await fetch(
-      "https://dummyjson.com/products/search?q=" + searchItem,
+      "https://dummyjson.com/products/search?q=" + deferredSearchtem,
     );
     const json = await data.json();
     console.log("Product api data", json);
@@ -33,7 +35,7 @@ export const Autocomplete = () => {
           type="text"
           placeholder="Search item"
           onChange={handleInputChange}
-          value={searchItem}
+          value={deferredSearchtem}
         />
       </div>
       {suggestions && suggestions.length > 0 && (
@@ -44,10 +46,10 @@ export const Autocomplete = () => {
           </ul>
         </div>
       )}
-      {searchItem?.length >= 3 && suggestions?.length === 0 && (
+      {deferredSearchtem?.length >= 3 && suggestions?.length === 0 && (
         <p>No items found</p>
       )}
-      {searchItem?.length > 0 && searchItem?.length < 3 && (
+      {deferredSearchtem?.length > 0 && deferredSearchtem?.length < 3 && (
         <p>Enter at least 3 characters to search</p>
       )}
     </>
