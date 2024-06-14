@@ -16,7 +16,7 @@ export const Autocomplete = () => {
 
   const fetchProductsApi = async () => {
     const data = await fetch(
-      "https://dummyjson.com/products/search?q=" + deferredSearchtem,
+      "https://dummyjson.com/products/search?q=" + deferredSearchtem
     );
     const json = await data.json();
     console.log("Product api data", json);
@@ -55,3 +55,5 @@ export const Autocomplete = () => {
     </>
   );
 };
+
+export default Autocomplete;

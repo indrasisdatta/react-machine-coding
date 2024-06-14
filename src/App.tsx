@@ -1,12 +1,18 @@
 import "./App.css";
-import { Autocomplete } from "./components/Autocomplete";
+import { BrowserRouter, NavLink } from "react-router-dom";
+import { Router } from "./Router";
 
 function App() {
   return (
-    <>
-      <h1>Autocomplete App</h1>
-      <Autocomplete />
-    </>
+    <BrowserRouter>
+      <header>
+        <NavLink to="/autocomplete">Autocomplete</NavLink> |&nbsp;
+        <NavLink to="/products">Products</NavLink>
+      </header>
+      <body>
+        <Router />
+      </body>
+    </BrowserRouter>
   );
 }
 
