@@ -10,5 +10,6 @@
 8. Implement progress bar during file upload
 9. Twitter like text area (with emoji and @ type should open suggestions to select)
 10. Design products listing, details page with filters (Use child routes using Outlet)
+11. Design Bookmyshow seat booking
 
 Ref: [https://github.com/NikhilJHA01/Machine-Coding-Round/tree/main](https://github.com/NikhilJHA01/Machine-Coding-Round/tree/main)
