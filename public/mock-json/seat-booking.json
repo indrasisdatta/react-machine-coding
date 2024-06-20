@@ -1,0 +1,174 @@
+[
+  {
+    "A": [
+      {
+        "rowName": "A",
+        "type": "executive",
+        "price": 300.0,
+        "seats": [
+          {
+            "seatNo": 1,
+            "seatPos": 1,
+            "status": "available"
+          },
+          {
+            "seatNo": 2,
+            "seatPos": 2,
+            "status": "available"
+          },
+          {
+            "seatNo": 3,
+            "seatPos": 3,
+            "status": "available"
+          },
+          {
+            "seatNo": 4,
+            "seatPos": 4,
+            "status": "available"
+          },
+          {
+            "seatNo": 5,
+            "seatPos": 5,
+            "status": "available"
+          }
+        ]
+      }
+    ],
+    "B": [
+      {
+        "rowName": "B",
+        "type": "executive",
+        "price": 300.0,
+        "seats": [
+          {
+            "seatNo": 1,
+            "seatPos": 1,
+            "status": "available"
+          },
+          {
+            "seatNo": 2,
+            "seatPos": 2,
+            "status": "available"
+          },
+          {
+            "seatNo": 3,
+            "seatPos": 3,
+            "status": "available"
+          },
+          {
+            "seatNo": 4,
+            "seatPos": 4,
+            "status": "available"
+          },
+          {
+            "seatNo": 5,
+            "seatPos": 5,
+            "status": "available"
+          }
+        ]
+      }
+    ],
+    "C": [
+      {
+        "rowName": "C",
+        "type": "classic",
+        "price": 150.0,
+        "seats": [
+          {
+            "seatNo": 1,
+            "seatPos": 1,
+            "status": "available"
+          },
+          {
+            "seatNo": 2,
+            "seatPos": 2,
+            "status": "available"
+          },
+          {
+            "seatNo": 3,
+            "seatPos": 3,
+            "status": "available"
+          },
+          {
+            "seatNo": 4,
+            "seatPos": 4,
+            "status": "available"
+          },
+          {
+            "seatNo": 5,
+            "seatPos": 5,
+            "status": "available"
+          }
+        ]
+      }
+    ],
+    "D": [
+      {
+        "rowName": "D",
+        "type": "classic",
+        "price": 150.0,
+        "seats": [
+          {
+            "seatNo": 1,
+            "seatPos": 1,
+            "status": "available"
+          },
+          {
+            "seatNo": 2,
+            "seatPos": 2,
+            "status": "available"
+          },
+          {
+            "seatNo": 3,
+            "seatPos": 3,
+            "status": "available"
+          },
+          {
+            "seatNo": 4,
+            "seatPos": 4,
+            "status": "available"
+          },
+          {
+            "seatNo": 5,
+            "seatPos": 5,
+            "status": "available"
+          }
+        ]
+      }
+    ],
+    "E": [
+      {
+        "rowName": "E",
+        "type": "classic",
+        "price": 150.0,
+        "seats": [
+          {
+            "seatNo": 1,
+            "seatPos": 1,
+            "status": "available"
+          },
+          {
+            "seatNo": 2,
+            "seatPos": 2,
+            "status": "available"
+          },
+          {
+            "seatNo": 3,
+            "seatPos": 3,
+            "status": "available"
+          },
+          {
+            "seatNo": 4,
+            "seatPos": 4,
+            "status": "available"
+          },
+          {
+            "seatNo": 5,
+            "seatPos": 5,
+            "status": "available"
+          }
+        ]
+      }
+    ]
+  }
+]

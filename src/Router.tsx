@@ -1,15 +1,15 @@
 import { Route, Routes } from "react-router-dom";
-// import { Autocomplete } from "./pages/Autocomplete";
-// import { ProductsList } from "./pages/Products/ProductsList";
 import { Suspense, lazy } from "react";
 
 const AutocompleteComp = lazy(() => import("./pages/Autocomplete"));
 const ProductsListComp = lazy(() => import("./pages/Products/ProductsList"));
 
 /* For named export */
-// const AutocompleteComp = lazy(() =>
-//     import("./pages/Autocomplete").then(module => ({ default: module.Autocomplete }))
-//   );
+const SeatBookingComp = lazy(() =>
+  import("./pages/SeatBooking/SeatBooking").then((module) => ({
+    default: module.SeatBooking,
+  }))
+);
 
 export const Router = () => {
   return (
@@ -21,7 +21,6 @@ export const Router = () => {
             <AutocompleteComp />
           </Suspense>
         }
-        //   lazy={() => import("./pages/Autocomplete")}
       />
       <Route
         path="/products"
@@ -30,7 +29,14 @@ export const Router = () => {
             <ProductsListComp />
           </Suspense>
         }
-        // lazy={() => import("./pages/Products/ProductsList")}
+      />
+      <Route
+        path="/seat-booking"
+        element={
+          <Suspense fallback={<p>Loading...</p>}>
+            <SeatBookingComp />
+          </Suspense>
+        }
       />
     </Routes>
   );

@@ -7,7 +7,8 @@ function App() {
     <BrowserRouter>
       <header>
         <NavLink to="/autocomplete">Autocomplete</NavLink> |&nbsp;
-        <NavLink to="/products">Products</NavLink>
+        <NavLink to="/products">Products</NavLink> |&nbsp;
+        <NavLink to="/seat-booking">Seat Booking</NavLink>
       </header>
       <body>
         <Router />
