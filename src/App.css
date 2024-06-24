@@ -40,3 +40,37 @@
 .read-the-docs {
   color: #888;
 }
+.container {
+  text-align: left;
+}
+.seat-group {
+  padding: 15px;
+}
+
+.seat-row__title {
+  font-weight: 600;
+  margin-right: 1rem;
+}
+.seat-row__seat {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid #000;
+  margin: 5px;
+}
+.seat-row__seat.blocked {
+  background-color: #cdc4c4;
+  cursor: not-allowed;
+  position: relative;
+}
+.seat-row__seat.blocked:after {
+  content: "X";
+  position: absolute;
+  color: #a30101;
+  top: -5px;
+  left: -2px;
+}
+.seat-row__seat.booked {
+  background-color: #cdc4c4;
+  opacity: 0.5;
+  cursor: not-allowed;
+}

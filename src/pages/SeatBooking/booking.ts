@@ -1,0 +1,143 @@
+export const seatBookingData = [
+  {
+    zone: "Executive",
+    rows: [
+      {
+        rowName: "A",
+        type: "executive",
+        price: 300.0,
+        seats: [
+          {
+            seatNo: 1,
+            seatPos: 1,
+            status: "available",
+          },
+          {
+            seatNo: 2,
+            seatPos: 2,
+            status: "booked",
+          },
+          {
+            seatNo: 3,
+            seatPos: 3,
+            status: "blocked",
+          },
+          {
+            seatNo: 4,
+            seatPos: 4,
+            status: "available",
+          },
+          {
+            seatNo: 5,
+            seatPos: 5,
+            status: "available",
+          },
+        ],
+      },
+
+      {
+        rowName: "B",
+        type: "executive",
+        price: 300.0,
+        seats: [
+          {
+            seatNo: 1,
+            seatPos: 2,
+            status: "blocked",
+          },
+          {
+            seatNo: 2,
+            seatPos: 3,
+            status: "available",
+          },
+          {
+            seatNo: 3,
+            seatPos: 5,
+            status: "available",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    zone: "Classic",
+    rows: [
+      {
+        rowName: "C",
+        type: "classic",
+        price: 150.0,
+        seats: [
+          {
+            seatNo: 1,
+            seatPos: 1,
+            status: "available",
+          },
+          {
+            seatNo: 2,
+            seatPos: 2,
+            status: "available",
+          },
+          {
+            seatNo: 3,
+            seatPos: 3,
+            status: "available",
+          },
+          {
+            seatNo: 4,
+            seatPos: 4,
+            status: "available",
+          },
+          {
+            seatNo: 5,
+            seatPos: 5,
+            status: "available",
+          },
+        ],
+      },
+      {
+        rowName: "D",
+        type: "classic",
+        price: 150.0,
+        seats: [
+          {
+            seatNo: 1,
+            seatPos: 2,
+            status: "available",
+          },
+          {
+            seatNo: 2,
+            seatPos: 3,
+            status: "available",
+          },
+          {
+            seatNo: 3,
+            seatPos: 4,
+            status: "available",
+          },
+        ],
+      },
+      {
+        rowName: "E",
+        type: "classic",
+        price: 150.0,
+        seats: [
+          {
+            seatNo: 1,
+            seatPos: 3,
+            status: "available",
+          },
+          {
+            seatNo: 2,
+            seatPos: 4,
+            status: "available",
+          },
+          {
+            seatNo: 3,
+            seatPos: 5,
+            status: "available",
+          },
+        ],
+      },
+    ],
+  },
+];

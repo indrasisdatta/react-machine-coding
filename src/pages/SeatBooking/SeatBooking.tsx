@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import { SeatRowType } from "../../types/SeatBooking";
 import { SeatRow } from "./SeatRow";
+import { seatBookingData } from "./booking";
 
 export const SeatBooking = () => {
   const [seatData, setseatData] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const response = await fetch("./mock-json/seat-booking.json");
-      const respData = await response.json();
+      // const response = await fetch("./mock-json/seat-booking.json");
+      // const respData = await response.json();
+      const respData = seatBookingData;
       setseatData(respData);
     })();
   });
+
+  console.log("Seat data: ", seatData);
 
   return (
     <div>
@@ -23,7 +27,7 @@ export const SeatBooking = () => {
           {seatData.length > 0 &&
             seatData.map(
               ({ zone, rows }: { zone: string; rows: SeatRowType[] }) => (
-                <div className="zone">
+                <div className="zone" key={zone}>
                   <h1>{zone}</h1>
                   {rows.length > 0 &&
                     rows.map((seatRow) => <SeatRow row={seatRow} />)}
