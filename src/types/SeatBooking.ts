@@ -1,7 +1,7 @@
 export interface SeatType {
   seatNo: number;
   seatPos: number;
-  status: "blocked" | "booked" | "not_available" | "available";
+  status: "blocked" | "booked" | "not_available" | "available" | "empty";
 }
 
 export interface SeatRowType {

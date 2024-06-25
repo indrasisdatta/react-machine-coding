@@ -46,11 +46,6 @@ export const seatBookingData = [
             status: "blocked",
           },
           {
-            seatNo: 2,
-            seatPos: 3,
-            status: "available",
-          },
-          {
             seatNo: 3,
             seatPos: 5,
             status: "available",
@@ -75,20 +70,15 @@ export const seatBookingData = [
           {
             seatNo: 2,
             seatPos: 2,
-            status: "available",
+            status: "blocked",
           },
           {
             seatNo: 3,
-            seatPos: 3,
-            status: "available",
+            seatPos: 4,
+            status: "booked",
           },
           {
             seatNo: 4,
-            seatPos: 4,
-            status: "available",
-          },
-          {
-            seatNo: 5,
             seatPos: 5,
             status: "available",
           },
@@ -102,15 +92,10 @@ export const seatBookingData = [
           {
             seatNo: 1,
             seatPos: 2,
-            status: "available",
+            status: "blocked",
           },
           {
             seatNo: 2,
-            seatPos: 3,
-            status: "available",
-          },
-          {
-            seatNo: 3,
             seatPos: 4,
             status: "available",
           },

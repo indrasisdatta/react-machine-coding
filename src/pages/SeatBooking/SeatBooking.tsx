@@ -3,19 +3,23 @@ import { SeatRowType } from "../../types/SeatBooking";
 import { SeatRow } from "./SeatRow";
 import { seatBookingData } from "./booking";
 
+interface SeatRespObj {
+  zone: string;
+  rows: SeatRowType[];
+}
+
 export const SeatBooking = () => {
-  const [seatData, setseatData] = useState([]);
+  const [seatData, setseatData] = useState<SeatRespObj[]>([]);
 
   useEffect(() => {
     (async () => {
       // const response = await fetch("./mock-json/seat-booking.json");
       // const respData = await response.json();
-      const respData = seatBookingData;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const respData = seatBookingData as any;
       setseatData(respData);
     })();
   });
-
-  console.log("Seat data: ", seatData);
 
   return (
     <div>
@@ -25,15 +29,13 @@ export const SeatBooking = () => {
       <div className="container">
         <div className="seat-group">
           {seatData.length > 0 &&
-            seatData.map(
-              ({ zone, rows }: { zone: string; rows: SeatRowType[] }) => (
-                <div className="zone" key={zone}>
-                  <h1>{zone}</h1>
-                  {rows.length > 0 &&
-                    rows.map((seatRow) => <SeatRow row={seatRow} />)}
-                </div>
-              )
-            )}
+            seatData.map(({ zone, rows }) => (
+              <div className="zone" key={zone}>
+                <h1>{zone}</h1>
+                {rows.length > 0 &&
+                  rows.map((seatRow) => <SeatRow row={seatRow} />)}
+              </div>
+            ))}
         </div>
       </div>
     </div>

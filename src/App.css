@@ -57,6 +57,9 @@
   border: 1px solid #000;
   margin: 5px;
 }
+.seat-row__seat.empty {
+  visibility: hidden;
+}
 .seat-row__seat.blocked {
   background-color: #cdc4c4;
   cursor: not-allowed;
@@ -67,7 +70,9 @@
   position: absolute;
   color: #a30101;
   top: -5px;
-  left: -2px;
+  left: 5px;
+  font-size: 2rem;
+  font-family: monospace;
 }
 .seat-row__seat.booked {
   background-color: #cdc4c4;
