@@ -1,6 +1,20 @@
+body {
+  margin: 0;
+}
+.menu-items {
+  margin: 0;
+  padding: 1em;
+  background: #000;
+}
+.menu-items li {
+  display: inline-block;
+  margin-right: 1em;
+}
+.menu-items li a {
+  color: #fff;
+  text-decoration: none;
+}
+
 .container {
   margin: 20px;
-}
-.seat-group {
-  border: 1px solid #000;
 }

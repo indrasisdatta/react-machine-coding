@@ -6,12 +6,25 @@ function App() {
   return (
     <BrowserRouter>
       <header>
-        <NavLink to="/autocomplete">Autocomplete</NavLink> |&nbsp;
-        <NavLink to="/products">Products</NavLink> |&nbsp;
-        <NavLink to="/seat-booking">Seat Booking</NavLink>
+        <ul className="menu-items">
+          <li>
+            <NavLink to="/autocomplete">Autocomplete</NavLink>
+          </li>
+          <li>
+            <NavLink to="/products">Products</NavLink>
+          </li>
+          <li>
+            <NavLink to="/seat-booking">Seat Booking</NavLink>
+          </li>
+          <li>
+            <NavLink to="/trello">Trello</NavLink>
+          </li>
+        </ul>
       </header>
       <body>
-        <Router />
+        <div className="container">
+          <Router />
+        </div>
       </body>
     </BrowserRouter>
   );

@@ -10,6 +10,10 @@
 8. Implement progress bar during file upload
 9. Twitter like text area (with emoji and @ type should open suggestions to select)
 10. Design products listing, details page with filters (Use child routes using Outlet)
-11. Design Bookmyshow seat booking
+11. Design Bookmyshow seat booking - Done
+12. Design Trello board
+    - list tasks by category (To do, In progress, Done)
+    - Add, edit, delete task
+    - Change category
 
 Ref: [https://github.com/NikhilJHA01/Machine-Coding-Round/tree/main](https://github.com/NikhilJHA01/Machine-Coding-Round/tree/main)

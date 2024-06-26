@@ -10,6 +10,7 @@ const SeatBookingComp = lazy(() =>
     default: module.SeatBooking,
   }))
 );
+const TrelloComp = lazy(() => import("./pages/Trello/Trello"));
 
 export const Router = () => {
   return (
@@ -35,6 +36,14 @@ export const Router = () => {
         element={
           <Suspense fallback={<p>Loading...</p>}>
             <SeatBookingComp />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/trello"
+        element={
+          <Suspense fallback={<p>Loading...</p>}>
+            <TrelloComp />
           </Suspense>
         }
       />

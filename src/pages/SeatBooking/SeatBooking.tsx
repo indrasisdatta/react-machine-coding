@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { SeatRowType } from "../../types/SeatBooking";
 import { SeatRow } from "./SeatRow";
 import { seatBookingData } from "./booking";
+import "./seat-booking.css";
 
 interface SeatRespObj {
   zone: string;
@@ -26,7 +27,9 @@ export const SeatBooking = () => {
       <a href="/system-design-booking.drawio.html" target="_blank">
         Check System Design
       </a>
-      <div className="container">
+      <br />
+      <br />
+      <div>
         <div className="seat-group">
           {seatData.length > 0 &&
             seatData.map(({ zone, rows }) => (
