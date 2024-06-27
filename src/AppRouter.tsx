@@ -12,7 +12,7 @@ const SeatBookingComp = lazy(() =>
 );
 const TrelloComp = lazy(() => import("./pages/Trello/Trello"));
 
-export const Router = () => {
+export const AppRouter = () => {
   return (
     <Routes>
       <Route
