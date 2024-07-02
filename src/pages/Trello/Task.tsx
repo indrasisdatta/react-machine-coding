@@ -2,6 +2,8 @@ import { ChangeEvent, FC, useState } from "react";
 import { categoryMap } from "./tasks";
 import { Category, Task, TaskList } from "../../types/Tasks";
 
+type ActionType = "edit" | "add";
+
 export const TaskComp: FC<{
   catKey: Category;
   taskList: TaskList;
@@ -36,7 +38,7 @@ export const TaskComp: FC<{
 
   const handleTaskName = (
     e: ChangeEvent<HTMLInputElement>,
-    action: "edit" | "add"
+    action: ActionType
   ) => {
     if (action === "edit") {
       const taskCopy = structuredClone(editableTask);
@@ -45,18 +47,25 @@ export const TaskComp: FC<{
       setEditableTask(taskCopy);
     } else if (action === "add") {
       const newTaskCopy = structuredClone(newTask);
-      newTaskCopy.name = e.target.name;
+      newTaskCopy.name = e.target.value;
       setNewTask(newTaskCopy);
     }
   };
 
-  const onSave = () => {
-    editHandler(editableTask, catKey);
-    setEditableTask({ id: 0, name: "" });
+  const onSave = (op: ActionType) => {
+    if (op === "edit") {
+      editHandler(editableTask, catKey);
+      setEditableTask({ id: 0, name: "" });
+    } else if (op === "add") {
+      addHandler(newTask, catKey);
+      setNewTask({ id: 0, name: "", cat: "" });
+    }
   };
 
-  const onCancel = () => {
-    setEditableTask({ id: 0, name: "" });
+  const onCancel = (op: ActionType) => {
+    if (op === "edit") {
+      setEditableTask({ id: 0, name: "" });
+    }
   };
 
   return (
@@ -67,19 +76,19 @@ export const TaskComp: FC<{
       </div>
       <div className="task-list__body">
         {taskList[catKey].map((task, index) => (
-          <>
+          <div key={`${categoryMap[catKey]}-${task.id}`}>
             {/* New task */}
             {index === 0 && newTask.cat === catKey && (
               <p className="task" key={`${newTask.cat}-${task.id}`}>
                 <>
                   <input
                     value={newTask.name}
-                    onChange={() => handleTaskName(e, "add")}
+                    onChange={(e) => handleTaskName(e, "add")}
                   />
                 </>
                 <span>
-                  <button onClick={onSave}>Save</button>&nbsp;
-                  <button onClick={onCancel}>Cancel</button>
+                  <button onClick={() => onSave("add")}>Save</button>&nbsp;
+                  <button onClick={() => onCancel("add")}>Cancel</button>
                 </span>
               </p>
             )}
@@ -89,7 +98,7 @@ export const TaskComp: FC<{
                 <>
                   <input
                     value={editableTask.name}
-                    onChange={() => handleTaskName(e, "edit")}
+                    onChange={(e) => handleTaskName(e, "edit")}
                   />
                 </>
               ) : (
@@ -97,8 +106,8 @@ export const TaskComp: FC<{
               )}
               {editableTask.id ? (
                 <span>
-                  <button onClick={onSave}>Save</button>&nbsp;
-                  <button onClick={onCancel}>Cancel</button>
+                  <button onClick={() => onSave("edit")}>Save</button>&nbsp;
+                  <button onClick={() => onCancel("edit")}>Cancel</button>
                 </span>
               ) : (
                 <span>
@@ -110,7 +119,7 @@ export const TaskComp: FC<{
                 </span>
               )}
             </p>
-          </>
+          </div>
         ))}
       </div>
     </div>

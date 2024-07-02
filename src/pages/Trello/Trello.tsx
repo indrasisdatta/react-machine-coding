@@ -11,11 +11,10 @@ const Trello = () => {
     setTaskList(tasksList);
   }, []);
 
-  // console.log("Task List: ", taskList);
-  // <div className="task-container">
-
   const addHandler = (task: Task, catKey: Category) => {
     const taskListCopy = structuredClone(taskList) as TaskList;
+    const catTasks = (taskListCopy as TaskList)[catKey];
+    task.id = Number(catTasks[catTasks.length - 1].id) + 1;
     (taskListCopy as TaskList)[catKey]?.push(task);
     setTaskList(taskListCopy);
   };
