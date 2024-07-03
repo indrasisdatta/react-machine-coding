@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, DragEvent, FC, SyntheticEvent, useState } from "react";
 import { categoryMap } from "./tasks";
 import { Category, Task, TaskList } from "../../types/Tasks";
 
@@ -68,33 +68,47 @@ export const TaskComp: FC<{
     }
   };
 
-  const handleDragStart = (e) => {
-    e.dataTransfer.setData("text/plain", e.target.id);
+  const handleDragStart = (e: DragEvent) => {
+    e.dataTransfer?.setData("text/plain", e.target?.id);
   };
 
-  const onDropHandler = (e) => {
-    const sourceId = e.dataTransfer.getData("text/plain");
+  const onDropHandler = (e: DragEvent<HTMLDivElement>) => {
+    const sourceId = e?.dataTransfer.getData("text/plain");
     const sourceEl = document.getElementById(sourceId);
     const sourceParent = sourceEl?.parentElement;
     let targetParent = null,
       targetHtml = null;
-    if (e.target.nodeName === "SPAN") {
-      targetParent = e.target?.parentElement?.parentElement;
-      targetHtml = e.target.parentElement.innerHTML;
+    if ((e.target as HTMLInputElement).nodeName === "SPAN") {
+      targetParent = (e.target as HTMLInputElement).parentElement
+        ?.parentElement;
+      targetHtml = (e.target as HTMLInputElement).parentElement?.innerHTML;
     } else {
-      targetParent = e.target?.parentElement;
-      targetHtml = e.target.innerHTML;
+      targetParent = (e.target as HTMLInputElement)?.parentElement;
+      targetHtml = (e.target as HTMLInputElement).innerHTML;
     }
     console.log("On drop handler", sourceId, e);
     console.log(
       "Compare source and target parent: ",
       sourceParent?.id,
-      targetParent.id
+      targetParent?.id
     );
-    if (sourceParent?.id === targetParent.id) {
+    console.log("Source/Target HTML", sourceEl?.innerHTML, targetHtml);
+    /* Ordering within same category */
+    if (sourceParent?.id === targetParent?.id) {
       let tempEl = sourceEl?.innerHTML;
-      sourceEl.innerHTML = targetHtml;
-      targetHtml = tempEl;
+      if ((e.target as HTMLInputElement)?.nodeName === "SPAN") {
+        sourceEl.innerHTML = (
+          e.target as HTMLInputElement
+        ).parentElement?.innerHTML;
+        e.target.parentElement.innerHTML = tempEl;
+        tempEl = null;
+      } else {
+        sourceEl.innerHTML = e.target.innerHTML;
+        (e.target as HTMLInputElement).innerHTML = tempEl;
+        tempEl = null;
+      }
+    } else {
+      /* Ordering within different category */
     }
   };
 
