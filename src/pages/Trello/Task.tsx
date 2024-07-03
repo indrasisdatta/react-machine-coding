@@ -68,6 +68,36 @@ export const TaskComp: FC<{
     }
   };
 
+  const handleDragStart = (e) => {
+    e.dataTransfer.setData("text/plain", e.target.id);
+  };
+
+  const onDropHandler = (e) => {
+    const sourceId = e.dataTransfer.getData("text/plain");
+    const sourceEl = document.getElementById(sourceId);
+    const sourceParent = sourceEl?.parentElement;
+    let targetParent = null,
+      targetHtml = null;
+    if (e.target.nodeName === "SPAN") {
+      targetParent = e.target?.parentElement?.parentElement;
+      targetHtml = e.target.parentElement.innerHTML;
+    } else {
+      targetParent = e.target?.parentElement;
+      targetHtml = e.target.innerHTML;
+    }
+    console.log("On drop handler", sourceId, e);
+    console.log(
+      "Compare source and target parent: ",
+      sourceParent?.id,
+      targetParent.id
+    );
+    if (sourceParent?.id === targetParent.id) {
+      let tempEl = sourceEl?.innerHTML;
+      sourceEl.innerHTML = targetHtml;
+      targetHtml = tempEl;
+    }
+  };
+
   return (
     <div key={categoryMap[catKey]} className={`task-list ${catKey}`}>
       <div className="task-list__header">
@@ -76,10 +106,19 @@ export const TaskComp: FC<{
       </div>
       <div className="task-list__body">
         {taskList[catKey].map((task, index) => (
-          <div key={`${categoryMap[catKey]}-${task.id}`}>
+          <div
+            key={`${categoryMap[catKey]}-${task.id}`}
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={onDropHandler}
+            id={catKey}
+          >
             {/* New task */}
             {index === 0 && newTask.cat === catKey && (
-              <p className="task" key={`${newTask.cat}-${task.id}`}>
+              <p
+                className="task"
+                key={`${newTask.cat}-${task.id}`}
+                id={`${newTask.cat}-${task.id}`}
+              >
                 <>
                   <input
                     value={newTask.name}
@@ -92,8 +131,14 @@ export const TaskComp: FC<{
                 </span>
               </p>
             )}
-            {/* // Previously saved task - edit, delete */}
-            <p className="task" key={`${categoryMap[catKey]}-${task.id}`}>
+            {/* Previously saved task - edit, delete */}
+            <p
+              className="task"
+              key={`${catKey}-${task.id}`}
+              id={`${catKey}-${task.id}`}
+              draggable={true}
+              onDragStart={handleDragStart}
+            >
               {editableTask?.id === task.id ? (
                 <>
                   <input
