@@ -76,30 +76,31 @@ export const TaskComp: FC<{
     const sourceId = e?.dataTransfer.getData("text/plain");
     const sourceEl = document.getElementById(sourceId);
     const sourceParent = sourceEl?.parentElement;
+    const sourceCat = sourceEl?.closest(".task-list__body")?.id;
     let targetParent = null,
-      targetHtml = null;
+      targetEl = null,
+      targetHtml = null,
+      targetCat = null;
+
     if ((e.target as HTMLInputElement).nodeName === "SPAN") {
       targetParent = (e.target as HTMLInputElement).parentElement
         ?.parentElement;
-      targetHtml = (e.target as HTMLInputElement).parentElement?.innerHTML;
+      targetEl = (e.target as HTMLInputElement).parentElement;
     } else {
       targetParent = (e.target as HTMLInputElement)?.parentElement;
-      targetHtml = (e.target as HTMLInputElement).innerHTML;
+      targetEl = e.target as HTMLInputElement;
     }
-    console.log("On drop handler", sourceId, e);
-    console.log(
-      "Compare source and target parent: ",
-      sourceParent?.id,
-      targetParent?.id
-    );
-    console.log("Source/Target HTML", sourceEl?.innerHTML, targetHtml);
+    targetCat = targetEl?.closest(".task-list__body")?.id;
+    targetHtml = targetEl?.innerHTML;
+    // console.log("On drop handler", sourceId, e);
+    // console.log("Compare source and target cat: ", sourceCat, targetCat);
+    // console.log("Source/Target HTML", sourceEl?.innerHTML, targetHtml);
     /* Ordering within same category */
-    if (sourceParent?.id === targetParent?.id) {
+    if (sourceCat === targetCat) {
       let tempEl = sourceEl?.innerHTML;
-      if ((e.target as HTMLInputElement)?.nodeName === "SPAN") {
-        sourceEl.innerHTML = (
-          e.target as HTMLInputElement
-        ).parentElement?.innerHTML;
+      if (e.target && (e.target as HTMLInputElement)?.nodeName === "SPAN") {
+        sourceEl.innerHTML = (e.target as HTMLInputElement).parentElement
+          ?.innerHTML as string;
         e.target.parentElement.innerHTML = tempEl;
         tempEl = null;
       } else {
@@ -109,6 +110,8 @@ export const TaskComp: FC<{
       }
     } else {
       /* Ordering within different category */
+      // targetParent.insertBefore(sourceEl, targetEl.nextsibling);
+      targetParent?.appendChild(sourceEl);
     }
   };
 
@@ -118,14 +121,14 @@ export const TaskComp: FC<{
         <h4>{categoryMap[catKey]}</h4>
         <button onClick={() => addTask()}>Add</button>
       </div>
-      <div className="task-list__body">
+      <div
+        className="task-list__body"
+        id={catKey}
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={onDropHandler}
+      >
         {taskList[catKey].map((task, index) => (
-          <div
-            key={`${categoryMap[catKey]}-${task.id}`}
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={onDropHandler}
-            id={catKey}
-          >
+          <div key={`${categoryMap[catKey]}-${task.id}`}>
             {/* New task */}
             {index === 0 && newTask.cat === catKey && (
               <p
