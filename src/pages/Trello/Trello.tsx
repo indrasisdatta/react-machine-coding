@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { tasksList } from "./tasks";
 import { Category, Task, TaskList } from "../../types/Tasks";
 import "./trello.css";
-import { TaskComp } from "./Task";
+// import { TaskComp } from "./Task";
+import { TaskComp } from "./TaskComp";
 
 const Trello = () => {
   const [taskList, setTaskList] = useState<TaskList>();
