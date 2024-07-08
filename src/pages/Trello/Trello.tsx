@@ -53,6 +53,7 @@ const Trello = () => {
             key={catKey}
             catKey={catKey as Category}
             taskList={taskList}
+            setTaskList={setTaskList}
             addHandler={addHandler}
             editHandler={editHandler}
             deleteHandler={deleteHandler}

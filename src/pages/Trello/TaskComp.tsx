@@ -7,10 +7,18 @@ type ActionType = "edit" | "add";
 export const TaskComp: FC<{
   catKey: Category;
   taskList: TaskList;
+  setTaskList: void;
   addHandler: (task: Task, catKey: Category) => void;
   editHandler: (task: Task, catKey: Category) => void;
   deleteHandler: (task: Task, catKey: Category) => void;
-}> = ({ catKey, taskList, addHandler, editHandler, deleteHandler }) => {
+}> = ({
+  catKey,
+  taskList,
+  setTaskList,
+  addHandler,
+  editHandler,
+  deleteHandler,
+}) => {
   //   console.log("Debug cat key", catKey, taskList[catKey]);
 
   const [editableTask, setEditableTask] = useState<Task>({
@@ -42,7 +50,7 @@ export const TaskComp: FC<{
     let sourceIndex, sourceTask;
     taskList[sourceCat].forEach((t, index) => {
       if (t.id === Number(sourceId)) {
-        sourceIndex = index;
+        sourceIndex = Number(index);
         sourceTask = t;
         return;
       }
@@ -89,11 +97,19 @@ export const TaskComp: FC<{
   const handleDragStart = (e: DragEvent) => {
     // catKey: Category, task: Task
     e.dataTransfer?.setData("text/plain", e.target?.id);
-    // console.log("Drag start: ", e, task, catKey);
+    console.log("Drag start: ", e.target?.id);
     // setDraggedTask({ task, category: catKey });
   };
 
+  /**
+   * TODO:
+   * !Different category logic
+   * !Same cat logic - optimize loop code
+   * @param e
+   * @param targetCat
+   */
   const onDropHandler = (e: DragEvent<HTMLDivElement>, targetCat: Category) => {
+    console.log("Target index attr: ", e.target?.getAttribute("data-index"));
     const targetIndex = Number(e.target?.getAttribute("data-index"));
     const [sourceCat, sourceId] = e.dataTransfer
       .getData("text/plain")
@@ -110,16 +126,32 @@ export const TaskComp: FC<{
     /**
      * Case 1: Same category
      *  Initial: 3  4  5  6  7  8 9 10 11 12
-     *                   (4) -> dragged here
+     *                   (4) -> dragged here (s=1, t=3)
      *  Result:  3  5  6  4  7 8 9 10 11 12
+     *  Initial: 3  4  5  6  7  8 9 10 11 12
+     *                 (10) -> dragged here (s=7, t=3)
+     *  Result:  3  4  5  10 6  7 8 9 11 12
      */
     if (sourceCat === targetCat) {
       const taskCopy = structuredClone(taskList[sourceCat]);
-      for (let i = sourceIndex; i < targetIndex; i++) {
-        taskCopy[i] = taskCopy[i + 1];
+      let start = Number(sourceIndex),
+        end = targetIndex;
+      if (Number(sourceIndex) < targetIndex) {
+        for (let i = start; i <= end; i++) {
+          taskCopy[i] = taskCopy[i + 1];
+        }
+      } else {
+        start = targetIndex + 1;
+        end = Number(sourceIndex);
+        taskCopy[targetIndex] = taskCopy[sourceIndex];
+        for (let i = start; i <= end; i++) {
+          taskCopy[i] = taskCopy[i + 1];
+        }
       }
+
       taskCopy[targetIndex] = sourceTask;
       console.log("Sorted task: ", taskCopy);
+      setTaskList((prev) => ({ ...prev, [sourceCat]: taskCopy }));
     }
 
     /**
