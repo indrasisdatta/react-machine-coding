@@ -108,9 +108,18 @@ export const TaskComp: FC<{
    * @param e
    * @param targetCat
    */
-  const onDropHandler = (e: DragEvent<HTMLDivElement>, targetCat: Category) => {
-    console.log("Target index attr: ", e.target?.getAttribute("data-index"));
-    const targetIndex = Number(e.target?.getAttribute("data-index"));
+  const onDropHandler = async (
+    e: DragEvent<HTMLDivElement>,
+    targetCat: Category
+  ) => {
+    let targetEl = e.target;
+    if ((e.target as HTMLInputElement).nodeName === "SPAN") {
+      targetEl = (e.target as HTMLInputElement).parentElement;
+    }
+    console.log("Check target: ", e.target, targetEl);
+    console.log("Target index attr: ", targetEl?.getAttribute("data-index"));
+    const targetIndex = Number(targetEl?.getAttribute("data-index"));
+    console.log("Target index: ", targetIndex);
     const [sourceCat, sourceId] = e.dataTransfer
       .getData("text/plain")
       .split("-");
@@ -125,14 +134,13 @@ export const TaskComp: FC<{
 
     /**
      * Case 1: Same category
-     *  Initial: 3  4  5  6  7  8 9 10 11 12
-     *                   (4) -> dragged here (s=1, t=3)
-     *  Result:  3  5  6  4  7 8 9 10 11 12
-     *  Initial: 3  4  5  6  7  8 9 10 11 12
-     *                 (10) -> dragged here (s=7, t=3)
-     *  Result:  3  4  5  10 6  7 8 9 11 12
      */
     if (sourceCat === targetCat) {
+      /**
+       * Initial: 3  4  5  6  7  8 9 10 11 12
+       *                   (4) -> dragged here (s=1, t=3)
+       *  Result:  3  5  6  4  7 8 9 10 11 12
+       */
       const taskCopy = structuredClone(taskList[sourceCat]);
       let start = Number(sourceIndex),
         end = targetIndex;
@@ -141,12 +149,25 @@ export const TaskComp: FC<{
           taskCopy[i] = taskCopy[i + 1];
         }
       } else {
-        start = targetIndex + 1;
+        /**
+         * Initial: 3  4  5  6  7  8 9 10 11 12
+         *                 (10) -> dragged here (s=7, t=3)
+         *  3 4 5 |  6 7 8 9 10 | 11 12
+         *        | 10 6 7 8 9  |
+         *  Result:  3  4  5  10 6  7 8 9 11 12
+         */
+        start = targetIndex;
         end = Number(sourceIndex);
-        taskCopy[targetIndex] = taskCopy[sourceIndex];
-        for (let i = start; i <= end; i++) {
-          taskCopy[i] = taskCopy[i + 1];
+        const slicedTask = taskCopy.slice(start, end);
+        console.log("Sliced task", slicedTask);
+        for (let i = start + 1; i <= end; i++) {
+          if (typeof i === "undefined" || typeof (i - 1) === "undefined") {
+            continue;
+          }
+          console.log("loop check", taskCopy[i], slicedTask[i - 1]);
+          taskCopy[i] = slicedTask[i - 1];
         }
+        taskCopy[targetIndex] = taskCopy[sourceIndex];
       }
 
       taskCopy[targetIndex] = sourceTask;
@@ -187,7 +208,7 @@ export const TaskComp: FC<{
               <p
                 className="task"
                 key={`${newTask.cat}-${task.id}`}
-                id={`${newTask.cat}-${task.id}`}
+                id={`${newTask.cat}-${task.id}-${index}`}
                 data-index={index}
               >
                 <>
@@ -206,7 +227,7 @@ export const TaskComp: FC<{
             <p
               className="task"
               key={`${catKey}-${task.id}`}
-              id={`${catKey}-${task.id}`}
+              id={`${catKey}-${task.id}-${index}`}
               data-index={index}
               draggable={true}
               onDragStart={handleDragStart}
