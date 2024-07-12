@@ -1,0 +1,27 @@
+.task-container {
+  display: flex;
+  gap: 1rem;
+}
+.task-list {
+  border: 1px solid #ddd;
+  padding: 0 1em;
+  flex: 1;
+}
+.task-list .task {
+  background-color: #ddd;
+  padding: 0.5rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.task-list__header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+.task-list__header h4 {
+  margin: 0;
+}
+/* .task-list__body {
+  height: 85%;
+  overflow: hidden;
+} */

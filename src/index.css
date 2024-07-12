@@ -1,6 +1,35 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+body {
+  margin: 0;
+}
+.menu-items {
+  margin: 0;
+  background: #000;
+  padding: 0 1.5em;
+}
+.menu-items li {
+  display: inline-block;
+}
+.menu-items li a:hover,
+.menu-items li a.active {
+  background-color: #757474;
+}
+.menu-items li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 1em;
+  display: inline-block;
+}
+.text-white {
+  color: #fff;
+}
+.app-name {
+  margin-right: 1em;
+  font-weight: 600;
+}
+
 .container {
   margin: 20px;
-}
-.seat-group {
-  border: 1px solid #000;
 }

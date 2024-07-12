@@ -1,18 +1,15 @@
 import "./App.css";
-import { BrowserRouter, NavLink } from "react-router-dom";
-import { Router } from "./Router";
+import { BrowserRouter } from "react-router-dom";
+import { AppRouter } from "./AppRouter";
+import Header from "./components/Header";
 
 function App() {
   return (
     <BrowserRouter>
-      <header>
-        <NavLink to="/autocomplete">Autocomplete</NavLink> |&nbsp;
-        <NavLink to="/products">Products</NavLink> |&nbsp;
-        <NavLink to="/seat-booking">Seat Booking</NavLink>
-      </header>
-      <body>
-        <Router />
-      </body>
+      <Header />
+      <div className="container">
+        <AppRouter />
+      </div>
     </BrowserRouter>
   );
 }

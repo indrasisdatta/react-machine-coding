@@ -1,0 +1,36 @@
+.seat-group {
+  padding: 15px;
+  border: 1px solid #000;
+}
+.seat-row__title {
+  font-weight: 600;
+  margin-right: 1rem;
+}
+.seat-row__seat {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid #000;
+  margin: 5px;
+}
+.seat-row__seat.empty {
+  visibility: hidden;
+}
+.seat-row__seat.blocked {
+  background-color: #cdc4c4;
+  cursor: not-allowed;
+  position: relative;
+}
+.seat-row__seat.blocked:after {
+  content: "X";
+  position: absolute;
+  color: #a30101;
+  top: -5px;
+  left: 5px;
+  font-size: 2rem;
+  font-family: monospace;
+}
+.seat-row__seat.booked {
+  background-color: #cdc4c4;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
